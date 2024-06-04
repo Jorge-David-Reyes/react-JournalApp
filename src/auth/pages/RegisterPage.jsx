@@ -5,9 +5,9 @@ import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks'; 
 
 const formData = {
-  email: 'jorge@gmail.com',
-  password: '123456',
-  displayName: 'Jorge Reyes',
+  email: '',
+  password: '',
+  displayName: '',
 }
 
 const formValidations = {
@@ -18,6 +18,8 @@ const formValidations = {
 
 export const RegisterPage = () => {
 
+  const [ formSubmitted, setFormSubmitted ] = useState( false );
+
   const { 
     displayName, email, password, onInputChange, formState,
     isFormValid, displayNameValid, emailValid, passwordValid,
@@ -27,11 +29,13 @@ export const RegisterPage = () => {
 
   const onSubmit = ( event ) => {
     event.preventDefault();
-    console.log( formState );
+    setFormSubmitted( true );
+    // console.log( formState );
   }
   
   return (
     <AuthLayout title='Crear cuenta'>
+        {/* <h1>FormValid: {isFormValid ? 'Valido': 'Incorrecto'}</h1> */}
         <form onSubmit={ onSubmit }>
           <Grid container>
             <Grid item xs={12} sx={{mt: 2}}>
@@ -43,8 +47,8 @@ export const RegisterPage = () => {
                 name = 'displayName'
                 value={ displayName }
                 onChange={ onInputChange }
-                error = { !displayNameValid }
-                helperText = "El nombre es obligatorio."
+                error = { !!displayNameValid && formSubmitted }
+                helperText = { displayNameValid }
               />
             </Grid>
 
@@ -57,6 +61,8 @@ export const RegisterPage = () => {
                 name = 'email'
                 value={ email }
                 onChange={ onInputChange }
+                error = { !!emailValid && formSubmitted }
+                helperText = { emailValid }
               />
             </Grid>
 
@@ -69,6 +75,8 @@ export const RegisterPage = () => {
                 name = 'password'
                 value={ password }
                 onChange={ onInputChange }
+                error = { !!passwordValid && formSubmitted }
+                helperText = { passwordValid }
               />
             </Grid>
 
