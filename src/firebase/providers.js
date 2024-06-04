@@ -38,8 +38,8 @@ export const registerUserWithEmailPassword = async({ email, password, displayNam
             uid, photoURL, email, displayName
         }
 
-    } catch (error) {
-        console.log(error);
+    } catch (error) { // TODO: manejar errores
+        // console.log(error);
         return { ok: false, errorMessage: error.message }
     }
 
