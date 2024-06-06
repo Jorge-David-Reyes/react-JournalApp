@@ -7,7 +7,7 @@ import { Google } from '@mui/icons-material';
 
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks';
-import { checkingAuthentication, startGoogleSignIn, startLoginWithEmailPassword  } from '../../store/auth';
+import { startGoogleSignIn, startLoginWithEmailPassword  } from '../../store/auth';
 
 const formData = {
   email: '',
@@ -80,15 +80,21 @@ export const LoginPage = () => {
                 />
               </Grid>
 
-              <Grid container spacing={2} sx={{ mb:2, mt:1 }}>
-                <Grid 
-                  item 
+
+              <Grid
+                container
+                display={ !!errorMessage ? '': 'none' }
+                sx={{ mt:2 }}
+              >
+                <Grid
+                  item
                   xs={12}
-                  display={!!errorMessage ? '' : 'none'}
                 >
                   <Alert severity='error'>{errorMessage}</Alert>
                 </Grid>
+              </Grid>
 
+              <Grid container spacing={2} sx={{ mb:2, mt:1 }}>
                 <Grid item xs={12} sm={6}>
                   <Button 
                     disabled={ isAuthenticating }
