@@ -1,9 +1,14 @@
 
 import { doc, collection, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
+import { addNewEmptyNote, savingNewNote, setActiveNote } from "./";
 
 export const startNewNote = () => {
     return async( dispatch, getState ) => {
+
+        //TODO: tarea dispatch
+        dispatch( savingNewNote() )
+
         // console.log('startNewNote');
         // uid
         const {uid} = getState().auth;
@@ -20,7 +25,8 @@ export const startNewNote = () => {
         console.log({newDoc, setDocResp});
 
         //!dispatch
-        // dispatch( newNote )
+        dispatch( addNewEmptyNote( newNote ) );
+        dispatch( setActiveNote( newNote ));
         // dispatch( activarNote )
     }
 }

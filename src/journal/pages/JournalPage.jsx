@@ -1,6 +1,6 @@
 // import { MailOutline } from "@mui/icons-material";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IconButton } from "@mui/material";
 import { AddOutlined } from "@mui/icons-material";
 
@@ -9,7 +9,7 @@ import { NoteView, NothingSelectedView } from "../views";
 import { startNewNote } from "../../store/journal/thunks";
 
 export const JournalPage = () => {
-
+  const { isSaving, active } = useSelector(state => state.journal);
   const dispatch = useDispatch();
 
   const onClickNewNote = () => {
@@ -22,15 +22,21 @@ export const JournalPage = () => {
       {/* <Typography>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum minima tenetur laudantium consectetur quisquam! Natus nihil reprehenderit voluptate beatae impedit atque mollitia distinctio optio? Quisquam beatae officiis illum optio adipisci.</Typography> */}
     
       {/* NothingSelected */}
-      <NothingSelectedView/>
+      {/* <NothingSelectedView/> */}
 
       {/* NoteView */}
       {/* <NoteView/> */}
+
+      {
+        // '!! sirve para convertir a booleano'
+        (!!active) ? <NoteView/> : <NothingSelectedView/>
+      }
 
 
       <IconButton
         onClick={ onClickNewNote }
         size='large'
+        disabled={ isSaving }
         sx={{
           color: 'white',
           backgroundColor: 'error.main',
