@@ -43,3 +43,13 @@ export const startLoadingNotes = () => {
         dispatch( setNotes(notes))
     }
 }
+
+
+export const startActiveNote = (note) => {
+    return async (dispatch, getState) => {
+        const { uid } = getState().auth;
+        if( !uid ) throw new Error('El UID del usuario no existe');
+        
+        dispatch( setActiveNote( note ));
+    }
+}
