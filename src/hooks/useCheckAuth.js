@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { logout, login } from '../store/auth';
 import { FirebaseAuth } from '../firebase/config';
+import { startLoadingNotes } from '../store/journal'
 
 export const useCheckAuth = () => {
     const {status} = useSelector(state => state.auth)
@@ -14,6 +15,7 @@ export const useCheckAuth = () => {
             
             const { uid, email, displayName, photoURL } = user;
             dispatch( login({ uid, email, displayName, photoURL }));
+            dispatch(  startLoadingNotes() );
         });
     }, []);
 
