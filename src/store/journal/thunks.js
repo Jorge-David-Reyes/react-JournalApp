@@ -1,7 +1,7 @@
 
 import { doc, collection, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes, setSaving } from "./";
+import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes, setSaving, updateNote } from "./";
 import { loadNotes } from "../../helpers";
 
 export const startNewNote = () => {
@@ -57,5 +57,7 @@ export const startSaveNote = () => {
 
         const docRef = doc( FirebaseDB, `${uid}/journal/notes/${note.id}` );
         await setDoc( docRef, noteToFirestore, { merge:true }); // merge, es para que no borre los campos que no se estan actualizando
+        
+        dispatch( updateNote( note ) );
     }
 }
