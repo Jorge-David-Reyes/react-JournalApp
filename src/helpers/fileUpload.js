@@ -12,11 +12,11 @@ export const fileUpload = async(file) => {
             body: formData
         }); // esto es para hacer la peticion http
 
-        console.log(resp);
+        // console.log(resp);
         if(!resp.ok) throw new Error('No se pudo subir la imagen'); // esto es para manejar errores
         
         const cloudResp = await resp.json(); // esto es para obtener la respuesta en formato json
-        console.log({cloudResp});
+        // console.log({cloudResp});
         
         return cloudResp.secure_url; // esto es para obtener la url de la imagen
 

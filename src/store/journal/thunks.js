@@ -1,7 +1,7 @@
 
 import { doc, collection, setDoc } from "firebase/firestore/lite";
 import { FirebaseDB } from "../../firebase/config";
-import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes, setSaving, updateNote } from "./";
+import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes, setSaving, updateNote, setPhotosToActiveNote } from "./";
 import { loadNotes, fileUpload } from "../../helpers";
 
 export const startNewNote = () => {
@@ -68,5 +68,19 @@ export const startUploadingFiles = ( files = []) => {
         dispatch(setSaving());
 
         await fileUpload( files[0] );
+
+        // Dispara en secuencia todas las promesas de las imagenes a subir
+        // Ya que si se hace con un forEach, se disparan todas las promesas al mismo tiempo 
+        // y se espera una respuesta de todas, lo cual no es lo que se quiere
+        
+        const fileUploadPromises = [];
+        for(const file of files) {
+            fileUploadPromises.push(fileUpload(file));
+        }
+
+        const photosUrls = await Promise.all( fileUploadPromises );
+        // console.log(photosUrls);
+    
+        dispatch( setPhotosToActiveNote( photosUrls ) );
     }
 }
