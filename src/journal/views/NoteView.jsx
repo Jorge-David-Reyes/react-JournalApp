@@ -69,13 +69,15 @@ export const NoteView = () => {
             style={{display: 'none'}}
         />
 
-        <IconButton
-            color="primary"
-            disabled = { isSaving }
-            onClick= {() => fileInputRef.current.click()}
-        >
-            <UploadOutlined/>
-        </IconButton>
+        <Grid item>
+            <IconButton
+                color="primary"
+                disabled = { isSaving }
+                onClick= {() => fileInputRef.current.click()}
+            >
+                <UploadOutlined/>
+            </IconButton>
+        </Grid>
 
         <Grid item>
             <Button 

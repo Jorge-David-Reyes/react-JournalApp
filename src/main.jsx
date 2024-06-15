@@ -14,5 +14,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <JournalApp />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

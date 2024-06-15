@@ -22,9 +22,11 @@ export const startNewNote = () => {
         }
 
         const newDoc = doc( collection( FirebaseDB, `${uid}/journal/notes`) );
-        const setDocResp = await setDoc( newDoc, newNote );
+        // const setDocResp = await setDoc( newDoc, newNote );
+        await setDoc( newDoc, newNote );
+        // console.log({newDoc, setDocResp});
 
-        console.log({newDoc, setDocResp});
+        newNote.id = newDoc.id;
 
         //!dispatch
         dispatch( addNewEmptyNote( newNote ) );
@@ -40,7 +42,6 @@ export const startLoadingNotes = () => {
 
         // console.log({uid})
         const notes = await loadNotes( uid );
-
         dispatch( setNotes(notes))
     }
 }
@@ -67,8 +68,6 @@ export const startUploadingFiles = ( files = []) => {
 
     return async( dispatch, getState ) => {
         dispatch(setSaving());
-
-        await fileUpload( files[0] );
 
         // Dispara en secuencia todas las promesas de las imagenes a subir
         // Ya que si se hace con un forEach, se disparan todas las promesas al mismo tiempo 
