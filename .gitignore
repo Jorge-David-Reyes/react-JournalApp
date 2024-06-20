@@ -22,3 +22,21 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# Tests
+babel.config.js
+jest.config.js
+jest.setup.js
+jest.setup.ts
+jest.setup.tsx
+jest.setup.babel.js
+jest.setup.babel.ts
+jest.setup.babel.tsx
+jest.setup.mjs
+jest.setup.cjs
+jest.setup.esm.js
+jest.setup.esm.ts
+jest.setup.esm.tsx
+jest.setup.cjs
+tests
