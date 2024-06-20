@@ -39,4 +39,12 @@ jest.setup.esm.js
 jest.setup.esm.ts
 jest.setup.esm.tsx
 jest.setup.cjs
+babel.config.cjs
+babel.config.mjs
+babel.config.ts
+babel.config.tsx
+jest.config.cjs
+jest.config.mjs
+jest.config.ts
+jest.config.tsx
 tests
