@@ -1,4 +1,7 @@
 export const fileUpload = async(file) => {
+    // if(!file) throw new Error("No tenemos ningun archivo a subir");
+    if( !file ) return null;
+
     const cloudUrl = 'https://api.cloudinary.com/v1_1/dzmld02wk/upload';
 
     const formData = new FormData(); // esto ya viene en javascript
@@ -21,7 +24,8 @@ export const fileUpload = async(file) => {
         return cloudResp.secure_url; // esto es para obtener la url de la imagen
 
     } catch (error) {
-        console.log(error);
-        throw new Error( error.message );
+        // console.log(error);
+        // throw new Error( error.message );
+        return null;
     }
 }
